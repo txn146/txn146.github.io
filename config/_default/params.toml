@@ -23,7 +23,7 @@ src = "img/13.png"
 
 [article]
 headingAnchor = false
-math = false
+math = true
 readingTime = true
 
 [article.license]
