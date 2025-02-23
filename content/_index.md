@@ -6,6 +6,4 @@ menu:
         params:
             icon: home
 ---
-# Welcome to My Website
 
-This is the home page of my website.
