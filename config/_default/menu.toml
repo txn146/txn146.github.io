@@ -2,7 +2,7 @@
 [[main]]
 identifier = "about"
 name = "About"
-url = "/page/about/"
+url = "/page/about"
 [main.params]
 icon = "user"
 newtab = true
