@@ -35,7 +35,7 @@ $$
 目标是估计最小化总体风险的参数向量，如下所示：
 
 $$
-\theta^* := \arg\min_{\theta \in \Theta} F_0(\theta) = \arg\min_{\theta \in \Theta} \int_X f(\theta;x) dP(x),
+\theta^{*} := \arg\min_{\theta \in \Theta} F_0(\theta) = \arg\min_{\theta \in \Theta} \int_X f(\theta;x) dP(x),
 $$
 
 其中假设 $\theta^*$ 是唯一的。在实际应用中，总体分布 $P$ 是未知的，但我们可以访问一个从分布 $P$ 中抽样的样本集合 $S$。经验风险最小化是基于通过求解优化问题来估计 $\theta^*$：
