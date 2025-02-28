@@ -38,7 +38,7 @@ $$
 \theta^{*} := \arg\min_{\theta \in \Theta} F_0(\theta) = \arg\min_{\theta \in \Theta} \int_X f(\theta;x) dP(x),
 $$
 
-其中假设 $\theta^*$ 是唯一的。在实际应用中，总体分布 $P$ 是未知的，但我们可以访问一个从分布 $P$ 中抽样的样本集合 $S$。经验风险最小化是基于通过求解优化问题来估计 $\theta^*$：
+其中假设 $\theta^{*}$ 是唯一的。在实际应用中，总体分布 $P$ 是未知的，但我们可以访问一个从分布 $P$ 中抽样的样本集合 $S$。经验风险最小化是基于通过求解优化问题来估计 $\theta^{*}$：
 
 $$
 \hat{\theta} \in \arg\min_{\theta \in \Theta} \left\{ \frac{1}{|S|} \sum_{x \in S} f(\theta;x) \right\}.
@@ -46,20 +46,18 @@ $$
 
 ### 假设条件
 
-在整个论文中，我们对参数空间、风险函数 $F_0$ 和损失函数 $f(\cdot;x): \Theta \to \mathbb{R}$ 施加了一些正则性条件。这些条件是经典统计学中 M-估计（如 Lehmann 和 Casella, 1998；Keener, 2010）分析中的标准条件。我们的第一个假设涉及参数空间与最优参数 $\theta^*$ 之间的关系。
+在整个论文中，需要对参数空间、风险函数 $F_0$ 和损失函数 $f(\cdot;x): \Theta \to \mathbb{R}$ 施加一些正则性条件。这些条件是经典统计学中 M-估计（如 Lehmann 和 Casella, 1998；Keener, 2010）分析中的标准条件。
 
 #### 假设 1 (参数空间)
-参数空间 $\Theta \subset \mathbb{R}^d$ 是一个紧致凸集，并且有 $\theta^* \in \mathrm{int} \, \Theta$，$\ell_2$-半径为 $R = \max_{\theta \in \Theta} \|\theta - \theta^*\|_2$。
+参数空间 $\Theta \subset \mathbb{R}^d$ 是一个紧致凸集，并且有 $\theta^* \in \mathrm{int} \, \Theta$，$\ell_2$-半径为 $R = \max_{\theta \in \Theta} \|\theta - \theta^{*}\|_2$。第一个假设涉及参数空间与最优化参数之间的关系
 
 此外，风险函数要求具有一定的曲率。我们通过 $F_0$ 的 Hessian 矩阵来正式化这一概念：
 
 #### 假设 2 (局部强凸性)
-群体风险是二次可微的，并且存在参数 $\lambda > 0$ 使得
-
+总体风险是二次可微的，并且存在参数 $\lambda > 0$ 使得
 $$
 \nabla^2 F_0(\theta^*) \succeq \lambda I_{d \times d}.
 $$
-
 这里，$\nabla^2 F_0(\theta)$ 表示群体目标函数 $F_0$ 在 $\theta$ 处的 $d \times d$ Hessian 矩阵，我们使用 $\succeq$ 来表示半正定的矩阵顺序（即，$A \succeq B$ 表示 $A - B$ 是正半定的）。这个局部条件比全局强凸性条件更为宽松，只要求在 $\theta^*$ 处的群体风险 $F_0$ 满足条件。需要注意的是，对于任何方法来说，估计参数 $\theta^*$ 时都需要某种类型的曲率。
 
 ## 平均混合算法
