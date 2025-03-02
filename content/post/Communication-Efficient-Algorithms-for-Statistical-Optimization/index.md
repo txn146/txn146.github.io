@@ -60,7 +60,7 @@ $$
 $$
 这里，$\nabla^2 F_0(\theta)$ 表示群体目标函数 $F_0$ 在 $\theta$ 处的 $d \times d$ Hessian 矩阵，我们使用 $\succeq$ 来表示半正定的矩阵顺序（即，$A \succeq B$ 表示 $A - B$ 是正半定的）。这个局部条件比全局强凸性条件更为宽松，只要求在 $\theta^{*}$ 处的群体风险 $F_0$ 满足条件。需要注意的是，对于任何方法来说，估计参数 $\theta^{*}$ 时都需要某种类型的曲率。
 
-## 平均混合算法
+### 平均混合算法
 考虑一个数据集，由 $N = mn$ 个样本组成，独立同分布（i.i.d.），遵循分布 $P$。在分布式设置中，我们将 $N$ 个样本数据均匀随机地分配给 $m$ 个处理器。（为简便起见，我们假设样本总数是 $m$ 的倍数）。对于每个 $i = 1, \dots, m$，我们让 $S_{1,i}$ 表示分配给第 $i$ 个处理器的数据集；构造上，它是从分布 $P$ 中独立抽取的 $n$ 个样本，而每个子集 $S_{1,i}$ 和 $S_{1,j}$ 对 $i \neq j$ 是独立的。此外，对于每个处理器 $i$，我们定义（局部）经验分布 $P_{1,i}$ 和经验目标函数 $F_{1,i}$：
 
 $$
@@ -93,9 +93,45 @@ $$
 
 ## 理论结果
 
-### 光滑条件
+### 光滑性条件
+除了我们之前关于总体风险的假设外，我们还要求对经验风险函数施加一些正则性条件。最简单的方式是用函数 $ \theta \mapsto f(\theta;x) $ 来表示这些条件，我们注意到，正如假设 2 中所要求的，我们只需要这些条件在某些局部区域内成立，特别是在某个欧几里得球 $ U = \{ \theta \in \mathbb{R}^d | \|\theta - \theta^*\|_2 \leq \rho \} \subset \Theta $ 内。
+
+#### 假设 3（光滑性）
+
+假设函数 $ f $ 的一阶和二阶偏导数存在，并满足以下界限：
+
+$$
+\mathbb{E} \left[ \| \nabla f(\theta; X) \|^8 \right] \leq G^8, \quad \mathbb{E} \left[ \| \nabla^2 f(\theta; X) - \nabla^2 F_0(\theta) \|^8 \right] \leq H^8 \quad \text{对于所有} \, \theta \in U.
+$$
+
+此外，对于任意 $ x \in X $，Hessian 矩阵 $ \nabla^2 f(\theta;x) $ 是 $ L(x) $-Lipschitz 连续的，意味着：
+
+$$
+\| \nabla^2 f(\theta'; x) - \nabla^2 f(\theta; x) \|_2 \leq L(x) \| \theta' - \theta \|_2 \quad \text{对于所有} \, \theta, \theta' \in U,
+$$
+
+并且我们要求：
+
+$$
+\mathbb{E} \left[ L(X)^8 \right] \leq L^8 \quad \text{并且} \quad \mathbb{E} \left[ |L(X) - \mathbb{E}[L(X)]|^8 \right] \leq L^8 \quad \text{对于某个有限常数} L.
+$$
 
 ### 平均混合的误差界
+在假设 1 到假设 3 的条件下，平均混合的均方误差上界为：
+
+$$
+\mathbb{E} \left[ \|\bar{\theta} - \theta^*\|^2 \right] \leq \frac{2}{nm} \mathbb{E} \left[ \|\nabla^2 F_0(\theta^*)^{-1} \nabla f(\theta^*;X)\|_2^2 \right] 
+$$
+
+$$
++ \frac{c}{\lambda^2 n^2} \left( H^2 \log d + \frac{L^2 G^2}{\lambda^2} \right) \mathbb{E} \left[ \|\nabla^2 F_0(\theta^*)^{-1} \nabla f(\theta^*; X)\|_2^2 \right] 
+$$
+
+$$
++ O(m^{-1} n^{-2}) + O(n^{-3}),
+$$
+
+其中 $c$ 是一个数值常数。
 
 ### 子抽样平均混合的误差界
 
