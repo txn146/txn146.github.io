@@ -145,16 +145,89 @@ $$
 $\| Ax \|_2 \leq \| A \|_2 \| x \|_2$（对任意矩阵 \( A \) 和向量 \( x \) 成立），而步骤 (ii) 依据假设 2。此外，假设 3 表明：$
 \mathbb{E} \left[ \|\nabla f(\theta^{*};X)\|^2 \right] \leq G^2$, 综合这些部分，我们可以得出以下结论。
 
-推论 2 在定理 1 相同的条件下：
+推论 2： 在定理 1 相同的条件下：
 
 $$
 \mathbb{E} \left[ \|\bar{\theta} -\theta^{*}\|^2 \right] \leq \frac{2G^2}{\lambda^2 nm} + \frac{c G^2}{\lambda^4 n^2} \left( H^2 \log d + \frac{L^2 G^2}{\lambda^2} \right) + O\left(m^{-1} n^{-2}\right) + O\left(n^{-3}\right)
 $$
 
-
 这个上界表明，主导项的衰减比例为 \( (nm)^{-1} \)，其系数与强凸性常数 \( \lambda \) 反比，并与损失梯度的上界 \( G \) 成正比。虽然易于解释，但上界 (8) 可能较松弛，因为它是基于相对较弱的不等式 (7) 推导而来的。
 我们原始上界 (6) 的主导项涉及梯度 \( \nabla f(\theta^{*};X) \) 与逆 Hessian 的乘积。在许多统计设置中，包括线性回归问题，这种矩阵-向量乘积的影响通常会通过某种标准化方式来处理。
 其中 $c$ 是一个数值常数。
+
+## 负对数似然与费舍尔信息矩阵
+
+损失函数 \( f(\cdot; x): \Theta \to \mathbb{R} \) 实际上是参数模型族 \( \{P_{\theta}\} \) 的负对数似然 \( \ell(x \mid \theta) \)。在适当的正则性条件下（例如 Lehmann 和 Casella，1998，第 6 章），我们可以定义 **费舍尔信息矩阵**：
+
+\[
+I(\theta^*) := \mathbb{E} \left[ \nabla \ell (X \mid \theta^*) \nabla \ell (X \mid \theta^*)^\top \right] = \mathbb{E} [\nabla^2 \ell (X \mid \theta^*)].
+\]
+
+回忆一下，\( N = mn \) 是可用的样本总数，我们定义邻域：
+
+\[
+B_2(\theta, t) := \{\theta' \in \mathbb{R}^d : \|\theta' - \theta\|_2 \leq t\}.
+\]
+
+在我们的假设下，Hájek-Le Cam 最小最大定理（van der Vaart, 1998, Theorem 8.11）保证对于 **基于 \( N \) 个样本的任何估计量 \( \hat{\theta}_N \)**，成立：
+
+\[
+\lim\inf_{c \to \infty} \lim\inf_{N \to \infty} \sup_{\theta \in B_2(\theta^*, c/\sqrt{N})} N \mathbb{E}_{\theta} \left[ \|\hat{\theta}_N - \theta\|_2^2 \right] \geq \text{tr}(I(\theta^*)^{-1}).
+\]
+
+## **推论 3**
+**在定理 1 的条件基础上，假设损失函数 \( f(\cdot; x) \) 也是参数族 \( \{P_{\theta}, \theta \in \Theta\} \) 的负对数似然，则均方误差可以被上界如下：**
+
+\[
+\mathbb{E} \left[ \|\bar{\theta} - \theta^*\|^2_{\text{ICA}} \right] 
+\leq \frac{2}{mn} \text{tr}(I(\theta^*)^{-1}) 
++ \frac{cm^2}{\lambda^2 N^2} \text{tr}(I(\theta^*)^{-1}) 
+\left( H^2 \log d + \frac{L^2 G^2}{\lambda^2} \right) + O(M^{-N}),
+\]
+
+其中 \( c \) 是一个常数。
+
+### **证明**
+将负对数似然重写为 **Theorem 1** 的记号，我们有：
+
+\[
+\nabla \ell(x \mid \theta^*) = \nabla f(\theta^*;x).
+\]
+
+于是，我们需要计算 **费舍尔信息矩阵的逆**：
+
+\[
+I(\theta^*)^{-1} = \mathbb{E} \left[ I(\theta^*)^{-1} \nabla \ell (X \mid \theta^*) \nabla \ell (X \mid \theta^*)^\top I(\theta^*)^{-1} \right].
+\]
+
+\[
+= \mathbb{E} \left[ \left( \nabla^2 F_0(\theta^*)^{-1} \nabla f(\theta^*; X) \right) \left( \nabla^2 F_0(\theta^*)^{-1} \nabla f(\theta^*; X) \right)^\top \right].
+\]
+
+现在，我们应用 **迹的线性性** 并使用 **\( \text{tr}(uu^\top) = \| u \|_2^2 \)**，得出结论。 \(\blacksquare\)
+
+---
+
+## **推论 3 的意义**
+除了界中的常数 \( 2 \) 之外，**推论 3 说明了定理 1 本质上已经达到了最优结果**。然而，该推论的关键之处在于：
+- **无需计算所有 \( N = mn \) 个样本的估计**。
+- **我们仅计算 \( m \) 个独立估计值 \( \hat{\theta} \)**，然后对它们求均值以达到收敛保证。
+
+通过检查证明，我们可以发现：
+- **如果愿意牺牲高阶误差的更差常数，我们可以将定理 1 的主导项 \( \frac{2}{mn} \) 缩减为 \( (1 + c)/mn \)（对于任意 \( c > 0 \)）**。
+- **然而，正如推论 3 所述，这种缩减是无法进一步改进的**，即便是通过常数因子优化。
+
+---
+
+## **与经典估计理论的联系**
+- 由于独立求解的 \( m \) 个估计会减少方差 \( 1/m \)，我们的结果与 M-估计理论中的经典分布收敛结果类似。
+- **对于平滑函数，M-估计收敛速度与独立均值收敛速度相同**（van der Vaart, 1998; Lehmann 和 Casella, 1998）。
+- **合并多个独立估计的均值可以进一步降低方差**。
+
+尽管如此，**有时候使用有偏估计（biased estimators）是有意义的**，但这会引入额外的分析复杂性，我们将在下一节进一步探讨。此外：
+- **与经典渐近理论不同，我们的结果适用于有限样本，并提供均方误差的显式上界**。
+- **我们的结果不依赖于特定模型，这使得它们适用于较为一般的采样分布**。
+
 
 ### 子抽样平均混合的误差界
 
