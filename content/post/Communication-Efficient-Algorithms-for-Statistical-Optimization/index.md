@@ -151,7 +151,7 @@ $$
 \mathbb{E} \left[ \|\bar{\theta} - \theta^{*}\|^2 \right] 
 \leq \frac{2G^2}{\lambda^2 nm} 
 + \frac{c G^2}{\lambda^4 n^2} \left( H^2 \log d + \frac{L^2 G^2}{\lambda^2} \right) 
-+ O(m^{-1} n^{-2}) + O(n^{-3}).
++ O\left(m^{-1} n^{-2}\right) + O\left(n^{-3}\right).
 $$
 
 这个上界表明，主导项的衰减比例为 \( (nm)^{-1} \)，其系数与强凸性常数 \( \lambda \) 反比，并与损失梯度的上界 \( G \) 成正比。虽然易于解释，但上界 (8) 可能较松弛，因为它是基于相对较弱的不等式 (7) 推导而来的。
