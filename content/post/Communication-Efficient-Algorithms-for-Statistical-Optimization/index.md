@@ -148,10 +148,7 @@ $\| Ax \|_2 \leq \| A \|_2 \| x \|_2$（对任意矩阵 \( A \) 和向量 \( x \
 推论 2 在定理 1 相同的条件下：
 
 $$
-\mathbb{E} \left[ \|\bar{\theta} - \theta^*\|^2 \right] 
-\leq \frac{2G^2}{\lambda^2 nm} 
-+ \frac{c G^2}{\lambda^4 n^2} \left( H^2 \log d + \frac{L^2 G^2}{\lambda^2} \right) 
-+ O\left(m^{-1} n^{-2}\right) + O\left(n^{-3}\right).
+\mathbb{E} \left[ \|\bar{\theta} -\theta^{*}\|^2 \right] \leq \frac{2G^2}{\lambda^2 nm} + \frac{c G^2}{\lambda^4 n^2} \left( H^2 \log d + \frac{L^2 G^2}{\lambda^2} \right) + O\left(m^{-1} n^{-2}\right) + O\left(n^{-3}\right)
 $$
 
 
