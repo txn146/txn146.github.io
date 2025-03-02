@@ -148,11 +148,12 @@ $\| Ax \|_2 \leq \| A \|_2 \| x \|_2$（对任意矩阵 \( A \) 和向量 \( x \
 推论 2 在定理 1 相同的条件下：
 
 $$
-\mathbb{E} \left[ \|\bar{\theta} - \theta^{*}\|^2 \right] 
+\mathbb{E} \left[ \|\bar{\theta} - \theta^*\|^2 \right] 
 \leq \frac{2G^2}{\lambda^2 nm} 
 + \frac{c G^2}{\lambda^4 n^2} \left( H^2 \log d + \frac{L^2 G^2}{\lambda^2} \right) 
 + O\left(m^{-1} n^{-2}\right) + O\left(n^{-3}\right).
 $$
+
 
 这个上界表明，主导项的衰减比例为 \( (nm)^{-1} \)，其系数与强凸性常数 \( \lambda \) 反比，并与损失梯度的上界 \( G \) 成正比。虽然易于解释，但上界 (8) 可能较松弛，因为它是基于相对较弱的不等式 (7) 推导而来的。
 我们原始上界 (6) 的主导项涉及梯度 \( \nabla f(\theta^{*};X) \) 与逆 Hessian 的乘积。在许多统计设置中，包括线性回归问题，这种矩阵-向量乘积的影响通常会通过某种标准化方式来处理。
