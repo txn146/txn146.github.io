@@ -120,12 +120,13 @@ $$
 在假设 1 到假设 3 的条件下，平均混合的均方误差上界为：
 
 $$
-\begin{align*}
+\begin{align}
 \mathbb{E} \left[ \|\bar{\theta} - \theta^*\|^2 \right] &\leq \frac{2}{nm} \mathbb{E} \left[ \|\nabla^2 F_0(\theta^*)^{-1} \nabla f(\theta^*;X)\|_2^2 \right] \\ 
 &\quad + \frac{c}{\lambda^2 n^2} \left( H^2 \log d + \frac{L^2 G^2}{\lambda^2} \right) \mathbb{E} \left[ \|\nabla^2 F_0(\theta^*)^{-1} \nabla f(\theta^*; X)\|_2^2 \right] \\
 &\quad + O(m^{-1} n^{-2}) + O(n^{-3}).
-\end{align*}
+\end{align}
 $$
+
 
 
 
