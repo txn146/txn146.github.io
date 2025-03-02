@@ -120,23 +120,13 @@ $$
 在假设 1 到假设 3 的条件下，平均混合的均方误差上界为：
 
 $$
-\mathbb{E} \left[ \|\bar{\theta} - \theta^*\|^2 \right] \leq \frac{2}{nm} \mathbb{E} \left[ \|\nabla^2 F_0(\theta^*)^{-1} \nabla f(\theta^*;X)\|_2^2 \right] 
-$$
-
-$$
-+ \frac{c}{\lambda^2 n^2} \left( H^2 \log d + \frac{L^2 G^2}{\lambda^2} \right) \mathbb{E} \left[ \|\nabla^2 F_0(\theta^*)^{-1} \nabla f(\theta^*; X)\|_2^2 \right] 
-$$
-
-$$
+\begin{align*}
+\mathbb{E} \left[ \|\bar{\theta} - \theta^*\|^2 \right] \leq \frac{2}{nm} \mathbb{E} \left[ \|\nabla^2 F_0(\theta^*)^{-1} \nabla f(\theta^*;X)\|_2^2 \right]\\ 
++ \frac{c}{\lambda^2 n^2} \left( H^2 \log d + \frac{L^2 G^2}{\lambda^2} \right) \mathbb{E} \left[ \|\nabla^2 F_0(\theta^*)^{-1} \nabla f(\theta^*; X)\|_2^2 \right]\\
 + O(m^{-1} n^{-2}) + O(n^{-3}),
+\end{align*}
 $$
 
-$$
-\begin{align}
-    x &= y + z \\
-    a &= b + c
-\end{align}
-$$
 
 其中 $c$ 是一个数值常数。
 
