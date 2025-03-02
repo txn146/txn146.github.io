@@ -117,7 +117,9 @@ $$
 $$
 
 ### 平均混合的误差界
+
 定理1: 在假设 1 到假设 3 的条件下，平均混合的均方误差上界为：
+
 $$
 \begin{equation}
 \begin{aligned}
@@ -127,7 +129,9 @@ $$
 \end{aligned}
 \end{equation}
 $$
+
 定理 1 的一个稍弱推论使其更容易理解。特别是，注意到：
+
 $$
 \begin{equation}
 \left\| \nabla^2 F_0(\theta^{*})^{-1} \nabla f(\theta^{*};x) \right\|_2
